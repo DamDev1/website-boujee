@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 
 const rateLimit = new Map<string, { count: number; resetTime: number }>();
-const RATE_LIMIT = 20;
+const RATE_LIMIT = 10;
 const RATE_LIMIT_WINDOW = 60 * 1000;
 
 const getClientIP = (request: NextRequest): string => {
