@@ -26,20 +26,20 @@ export default function Home() {
     setLoading(true);
     setError('');
     setShowResult(false);
-    
+
     try {
       const response = await fetch('/api/roast-domain', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ domain: domain.trim() })
       });
-      
+
       const data = await response.json();
-      
+
       if (!response.ok) {
         throw new Error(data.message || 'Failed to roast domain');
       }
-      
+
       setResult(data.data);
       setTimeout(() => setShowResult(true), 100);
     } catch (err) {
@@ -83,7 +83,7 @@ export default function Home() {
             Get brutally honest AI-powered feedback about any domain
           </p>
         </div>
-        
+
         <div className="bg-white rounded-2xl p-8 shadow-2xl mb-8">
           <div className="flex gap-4 mb-6">
             <input
@@ -108,14 +108,14 @@ export default function Home() {
               ) : '🔥 Roast It!'}
             </button>
           </div>
-          
+
           {error && (
             <div className="px-5 py-4 bg-red-50 text-red-800 rounded-xl border-l-4 border-red-500 font-medium animate-pulse">
               ❌ {error}
             </div>
           )}
         </div>
-        
+
         {result && (
           <div className={`bg-white rounded-2xl p-8 shadow-2xl mb-8 transition-all duration-500 ${showResult ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}>
             <div className="flex justify-between items-center mb-8 pb-6 border-b-2 border-gray-100">
@@ -136,25 +136,7 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            
-            {result.compliments.length > 0 && (
-              <div className="mb-8">
-                <div className="flex items-center gap-2 mb-4">
-                  <div className="w-2 h-2 rounded-full bg-green-500"></div>
-                  <h3 className="text-2xl font-bold text-green-500">
-                    ✅ What's Working
-                  </h3>
-                </div>
-                <div className="bg-green-50 rounded-xl p-6 border-l-4 border-green-500">
-                  {result.compliments.map((comp, i) => (
-                    <div key={i} className={`py-3 text-lg text-green-900 leading-relaxed ${i < result.compliments.length - 1 ? 'border-b border-green-200' : ''}`}>
-                      • {comp}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}b
-            
+
             {result.roasts.length > 0 && (
               <div className="mb-8">
                 <div className="flex items-center gap-2 mb-4">
@@ -172,7 +154,25 @@ export default function Home() {
                 </div>
               </div>
             )}
-            
+
+            {result.compliments.length > 0 && (
+              <div className="mb-8">
+                <div className="flex items-center gap-2 mb-4">
+                  <div className="w-2 h-2 rounded-full bg-green-500"></div>
+                  <h3 className="text-2xl font-bold text-green-500">
+                    ✅ What's Working
+                  </h3>
+                </div>
+                <div className="bg-green-50 rounded-xl p-6 border-l-4 border-green-500">
+                  {result.compliments.map((comp, i) => (
+                    <div key={i} className={`py-3 text-lg text-green-900 leading-relaxed ${i < result.compliments.length - 1 ? 'border-b border-green-200' : ''}`}>
+                      • {comp}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
             {/* {result.suggestions.length > 0 && (
               <div>
                 <div className="flex items-center gap-2 mb-4">
@@ -192,7 +192,7 @@ export default function Home() {
             )} */}
           </div>
         )}
-        
+
         <div className="bg-white rounded-2xl p-8 shadow-2xl">
           <h3 className="text-2xl font-bold text-gray-900 mb-6">
             🎯 Try these popular domains:
