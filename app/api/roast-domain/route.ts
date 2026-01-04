@@ -96,18 +96,6 @@ export async function POST(request: NextRequest) {
   }
 }
 
-// Handle CORS preflight
-export async function OPTIONS() {
-  return new NextResponse(null, {
-    status: 200,
-    headers: {
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'POST, OPTIONS',
-      'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-    },
-  });
-}
-
 // Simple GET endpoint for testing
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;

@@ -196,7 +196,6 @@ export const analyzeDomain = async (domain: string): Promise<DomainInfo> => {
     } catch (error) {
         console.error('Domain analysis error:', error);
 
-        // Return fallback data for development
         const tld = '.' + domain.split('.').pop();
 
         return {
